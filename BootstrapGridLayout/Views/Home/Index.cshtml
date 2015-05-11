@@ -1,0 +1,51 @@
+﻿@model IEnumerable<BootstrapGridLayout.Models.Article>
+@using BootstrapGridLayout;
+@{
+    ViewBag.Title = "Home Page";
+    int counter = 0;
+}
+
+<h1>Approach 1</h1>
+
+<div class="row">
+@foreach (var article in Model)
+{
+    if (counter != 0 && counter % 3 == 0)
+    {
+        @:</div>
+        @:<div class="row">
+    }
+
+    <div class="col-md-4">
+        <div class="thumbnail">
+            <img src="@article.Thumbnail" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+            <div class="caption">
+                <h3 id="thumbnail-label">@article.Name</h3>
+                <p>@article.Description</p>
+            </div>
+        </div>
+    </div>
+
+    counter++;
+}
+</div>
+
+<h1>Approach 2</h1>
+
+@foreach (var row in Model.ToArray().Split(3))
+{
+    <div class="row">
+        @foreach (var article in row)
+        {
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <img src="@article.Thumbnail" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+                    <div class="caption">
+                        <h3 id="thumbnail-label">@article.Name</h3>
+                        <p>@article.Description</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
